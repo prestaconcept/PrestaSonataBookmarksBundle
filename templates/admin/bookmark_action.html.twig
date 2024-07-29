@@ -1,0 +1,51 @@
+{% trans_default_domain 'PrestaSonataBookmarksBundle' %}
+
+{% set bookmarks = get_presta_sonata_bookmarks() %}
+{% set routeParams = app.request.attributes.get('_route_params') %}
+{% set routeParamsAsString = '' %}
+{% for routeParamKey, routeParamValue in routeParams %}
+    {% set routeParamsAsString = routeParamsAsString ~ '&' ~ routeParamKey ~ '=' ~ routeParamValue %}
+{% endfor %}
+{% set routeParamsAsString = routeParamsAsString ~ '&' ~ app.request.queryString %}
+
+<ul class="nav navbar-nav navbar-right bookmarks">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {{ 'bookmark.name'|trans }}
+            <span class="badge">{{ bookmarks|length }}</span>
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-scrollable bookmarks-list" role="menu">
+            <li>
+                <a href="{{ get_presta_sonata_bookmarks_admin().generateUrl('list') }}">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    {{ 'breadcrumb.link_bookmark_list'|trans }}
+                </a>
+            </li>
+
+            {% for bookmark in bookmarks %}
+                <li>
+                    <a href="{{ bookmark.url }}">{{ bookmark.name }}</a>
+                </li>
+            {% endfor %}
+            <li>
+                <a href="#" class="create-bookmark">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    {{ 'bookmark.action.new'|trans }}
+                </a>
+                <form action="{{ path('presta_sonatabookmark_bookmark_new') }}" class="hidden">
+                    <div class="form-group col-sm-12">
+                        <label class="sr-only" for="bookmark_name">{{ 'bookmark.field.name'|trans }}</label>
+                        <input type="text" id="bookmark_name" name="bookmark[name]" placeholder="{{ 'bookmark.field.name'|trans }}" class="form-control input-sm" />
+                        <input type="hidden" id="bookmark_route" name="bookmark[route]" value="{{ app.request.attributes.get('_route') }}" />
+                        <input type="hidden" id="bookmark_params" name="bookmark[route_params]" value="{{ routeParamsAsString }}" />
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <button type="submit" class="btn btn-sm btn-success pull-right">{{ 'bookmark.button.submit'|trans }}</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </li>
+</ul>

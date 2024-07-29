@@ -1,0 +1,15 @@
+bookmark:
+  action:
+    new: 'Add bookmark'
+  breadcrumb:
+    list: 'Bookmarks'
+  button:
+    submit: 'Save'
+  field:
+    _action: 'Actions'
+    name: 'Name'
+    url: 'URL'
+  name: 'Bookmarks'
+
+breadcrumb:
+    link_bookmark_list: 'Bookmarks list'

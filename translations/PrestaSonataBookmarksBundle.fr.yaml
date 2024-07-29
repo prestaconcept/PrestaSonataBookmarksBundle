@@ -1,0 +1,13 @@
+bookmark:
+  action:
+    new: 'Ajouter en favori'
+  button:
+    submit: 'Enregistrer'
+  field:
+    _action: 'Actions'
+    name: 'Libellé'
+    url: 'URL'
+  name: 'Favoris'
+
+breadcrumb:
+  link_bookmark_list: 'Liste des favoris'
