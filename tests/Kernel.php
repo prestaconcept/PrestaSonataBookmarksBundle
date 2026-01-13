@@ -82,34 +82,38 @@ final class Kernel extends BaseKernel
                 ],
             ],
         ]);
+        $ormConfig = [
+            'naming_strategy' => 'doctrine.orm.naming_strategy.underscore',
+            'mappings' => [
+                'PrestaSonataBookmarksBundle' => [
+                    'is_bundle' => true,
+                    'type' => 'attribute',
+                    'dir' => 'src/Entity',
+                    'prefix' => 'Presta\\SonataBookmarksBundle\\Entity',
+                    'alias' => 'PrestaSonataBookmarksBundle',
+                ],
+                'Tests' => [
+                    'is_bundle' => false,
+                    'type' => 'attribute',
+                    'dir' => 'tests/App',
+                    'prefix' => 'Presta\\SonataBookmarksBundle\\Tests\\App',
+                    'alias' => 'Tests',
+                ],
+            ],
+            'resolve_target_entities' => [
+                BookmarkOwnerInterface::class => User::class,
+            ],
+        ];
+
+        if (\PHP_VERSION_ID < 80400) {
+            $ormConfig['auto_generate_proxy_classes'] = true;
+        }
         $container->extension('doctrine', [
             'dbal' => [
                 'url' => 'sqlite:///%kernel.project_dir%/var/database.sqlite',
                 'logging' => false,
             ],
-            'orm' => [
-                'auto_generate_proxy_classes' => true,
-                'naming_strategy' => 'doctrine.orm.naming_strategy.underscore',
-                'mappings' => [
-                    'PrestaSonataBookmarksBundle' => [
-                        'is_bundle' => true,
-                        'type' => 'attribute',
-                        'dir' => 'src/Entity',
-                        'prefix' => 'Presta\\SonataBookmarksBundle\\Entity',
-                        'alias' => 'PrestaSonataBookmarksBundle',
-                    ],
-                    'Tests' => [
-                        'is_bundle' => false,
-                        'type' => 'attribute',
-                        'dir' => 'tests/App',
-                        'prefix' => 'Presta\\SonataBookmarksBundle\\Tests\\App',
-                        'alias' => 'Tests',
-                    ],
-                ],
-                'resolve_target_entities' => [
-                    BookmarkOwnerInterface::class => User::class,
-                ],
-            ],
+            'orm' => $ormConfig,
         ]);
         $container->extension('twig', [
             'default_path' => __DIR__ . '/App/templates',

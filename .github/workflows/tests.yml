@@ -38,7 +38,10 @@ jobs:
           composer require --no-interaction --no-update \
             symfony/framework-bundle:${{ matrix.symfony-version }} \
             symfony/validator:${{ matrix.symfony-version }} \
-            symfony/http-kernel:${{ matrix.symfony-version }}
+            symfony/http-kernel:${{ matrix.symfony-version }} \
+            symfony/serializer:${{ matrix.symfony-version }} \
+            symfony/property-info:${{ matrix.symfony-version }} \
+            symfony/console:${{ matrix.symfony-version }}
           composer update --no-interaction --no-progress
 
       - name: "Run tests with phpunit/phpunit"
@@ -69,7 +72,10 @@ jobs:
           composer require --no-interaction --no-update \
             symfony/framework-bundle:${{ matrix.symfony-version }} \
             symfony/validator:${{ matrix.symfony-version }} \
-            symfony/http-kernel:${{ matrix.symfony-version }}
+            symfony/http-kernel:${{ matrix.symfony-version }} \
+            symfony/serializer:${{ matrix.symfony-version }} \
+            symfony/property-info:${{ matrix.symfony-version }} \
+            symfony/console:${{ matrix.symfony-version }}
           composer update --no-interaction --no-progress
 
       - name: "Run tests with phpunit/phpunit"
@@ -106,7 +112,10 @@ jobs:
           composer require --no-interaction --no-update \
             symfony/framework-bundle:${{ matrix.symfony-version }} \
             symfony/validator:${{ matrix.symfony-version }} \
-            symfony/http-kernel:${{ matrix.symfony-version }}
+            symfony/http-kernel:${{ matrix.symfony-version }} \
+            symfony/serializer:${{ matrix.symfony-version }} \
+            symfony/property-info:${{ matrix.symfony-version }} \
+            symfony/console:${{ matrix.symfony-version }}
           composer update --no-interaction --no-progress
 
       - name: "Run static analysis with phpstan/phpstan"
@@ -137,7 +146,10 @@ jobs:
           composer require --no-interaction --no-update \
             symfony/framework-bundle:${{ matrix.symfony-version }} \
             symfony/validator:${{ matrix.symfony-version }} \
-            symfony/http-kernel:${{ matrix.symfony-version }}
+            symfony/http-kernel:${{ matrix.symfony-version }} \
+            symfony/serializer:${{ matrix.symfony-version }} \
+            symfony/property-info:${{ matrix.symfony-version }} \
+            symfony/console:${{ matrix.symfony-version }}
           composer update --no-interaction --no-progress
 
       - name: "Run checkstyle with symplify/easy-coding-standard"
