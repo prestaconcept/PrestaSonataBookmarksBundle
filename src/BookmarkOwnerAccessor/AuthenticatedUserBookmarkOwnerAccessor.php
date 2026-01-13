@@ -17,7 +17,13 @@ final class AuthenticatedUserBookmarkOwnerAccessor implements BookmarkOwnerAcces
     public function get(): BookmarkOwnerInterface
     {
         $user = $this->tokenStorage->getToken()?->getUser();
-        if ($user === null) {
+        if (null === $user) {
+            // In CLI, there is no authenticated user.
+            if (PHP_SAPI === 'cli') {
+                // Return a dummy object that satisfies the interface to prevent commands from crashing.
+                return new class() implements BookmarkOwnerInterface {};
+            }
+
             throw new CannotAccessBookmarkOwnerException('Missing authenticated user.');
         }
 
