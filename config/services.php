@@ -13,6 +13,7 @@ use Presta\SonataBookmarksBundle\Repository\BookmarkRepository;
 use Presta\SonataBookmarksBundle\Twig\AdminExtension;
 use Presta\SonataBookmarksBundle\Twig\BookmarkExtension;
 use Sonata\AdminBundle\Admin\Pool;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -49,6 +50,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set(AuthenticatedUserBookmarkOwnerAccessor::class)
             ->args([
                 service(TokenStorageInterface::class),
+                service(KernelInterface::class),
             ])
 
         ->set(BookmarkRepository::class)
