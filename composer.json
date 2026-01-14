@@ -14,10 +14,7 @@
     "doctrine/orm": "^2.7|^3.2",
     "sonata-project/admin-bundle": "^4.22",
     "sonata-project/doctrine-orm-admin-bundle": "^4.9",
-    "symfony/console": "^6.3|^7.1",
     "symfony/framework-bundle": "^6.3|^7.1",
-    "symfony/property-info": "^6.3|^7.1",
-    "symfony/serializer": "^6.3|^7.1",
     "symfony/validator": "^6.3|^7.1",
     "symfony/yaml": "^6.3|^7.1",
     "twig/twig": "^3.5"
